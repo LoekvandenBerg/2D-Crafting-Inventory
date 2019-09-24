@@ -36,13 +36,13 @@ public class ItemDatabase : MonoBehaviour
             {
                 {"Value", 15 },
             }),
-            new Item(3, "Steel Axe", "A axe made out of steel",
+            new Item(3, "Gold Axe", "A axe made out of Gold",
             new Dictionary<string, int>
             {
                 {"Power", 5 },
                 {"Defense", 2 }
             }),
-            new Item(4, "Steel Ore", "Ore made of steel",
+            new Item(4, "Gold Ore", "Ore made of Gold",
             new Dictionary<string, int>
             {
                 {"Value", 5 },               
