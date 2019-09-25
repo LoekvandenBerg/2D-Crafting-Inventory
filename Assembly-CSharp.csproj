@@ -62,12 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CraftingSlots.cs" />
     <Compile Include="Assets\Scripts\CraftRecipe.cs" />
     <Compile Include="Assets\Scripts\CraftRecipeDatabase.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\ItemDatabase.cs" />
+    <Compile Include="Assets\Scripts\ItemFollowMouse.cs" />
     <Compile Include="Assets\Scripts\SlotPanel.cs" />
+    <Compile Include="Assets\Scripts\ToolTip.cs" />
+    <Compile Include="Assets\Scripts\UICraftResult.cs" />
     <Compile Include="Assets\Scripts\UIInventory.cs" />
     <Compile Include="Assets\Scripts\UIItem.cs" />
     <Reference Include="Unity.Timeline.Editor">

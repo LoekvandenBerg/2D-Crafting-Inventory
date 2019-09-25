@@ -4,15 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class UIItem : MonoBehaviour, IPointerDownHandler
+public class UIItem : MonoBehaviour, IPointerDownHandler, IPointerExitHandler, IPointerEnterHandler
 {
     public Item item;
     private Image spriteImage;
     private UIItem selectedItem;
+    private ToolTip toolTip;
+    public bool craftingSlot = false;
+    private CraftingSlots craftingSlots;
+    public bool craftingResultSlot = false;
 
 
     private void Awake()
     {
+        craftingSlots = FindObjectOfType<CraftingSlots>();
+        toolTip = FindObjectOfType<ToolTip>();
         selectedItem = GameObject.Find("SelectedItem").GetComponent<UIItem>();
         spriteImage = GetComponent<Image>();
         UpdateItem(null);
@@ -30,17 +36,55 @@ public class UIItem : MonoBehaviour, IPointerDownHandler
         {
             spriteImage.color = Color.clear;
         }
+        if (craftingSlot)
+        {
+            craftingSlots.UpdateRecipe();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if(this.item != null)
+        if (this.item != null)
         {
-            if(selectedItem.item != null)
+            UICraftResult craftResult = GetComponent<UICraftResult>();
+            if (craftResult != null && this.item != null && selectedItem.item == null)
             {
-                Item clone = new Item(selectedItem.item);
+                craftResult.PickItem();
                 selectedItem.UpdateItem(this.item);
+                craftResult.ClearSlots();
             }
+            else if (!craftingResultSlot)
+            {
+                if (selectedItem.item != null)
+                {
+                    Item clone = new Item(selectedItem.item);
+                    selectedItem.UpdateItem(this.item);
+                    UpdateItem(clone);
+                }
+                else
+                {
+                    selectedItem.UpdateItem(this.item);
+                    UpdateItem(null);
+                }
+            }
+        }
+        else if (selectedItem.item != null && !craftingResultSlot)
+        {
+            UpdateItem(selectedItem.item);
+            selectedItem.UpdateItem(null);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        toolTip.gameObject.SetActive(false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (this.item != null)
+        {
+            toolTip.GenerateToolTip(item);
         }
     }
 }

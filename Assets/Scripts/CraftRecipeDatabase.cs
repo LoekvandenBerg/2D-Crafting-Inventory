@@ -40,8 +40,8 @@ public class CraftRecipeDatabase : MonoBehaviour
             new CraftRecipe(3,
             new int[]
             {
-                5,3,3,
-                5,0,3,
+                5,4,4,
+                5,0,4,
                 5,0,0
             }),
             new CraftRecipe(7,
